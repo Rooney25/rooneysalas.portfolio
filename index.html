@@ -6,10 +6,10 @@
 <title>Rooney Salas — Mechanical Engineer</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap">
 <style>
-:root{--bg:#f6f8f9;--ink:#1b2226;--mute:#5d6a72;--line:#d3dadf;--panel:#e9eef1;--accent:#2b5f82;
+:root{--bg:#ece4d3;--ink:#111111;--mute:#5a5446;--line:#c9bea4;--panel:#e0d6c0;--accent:#111111;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12181c;--ink:#e6ecef;--mute:#93a1a9;--line:#2b363c;--panel:#1b2429;--accent:#7fb2d3;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#12181c;--ink:#e6ecef;--mute:#93a1a9;--line:#2b363c;--panel:#1b2429;--accent:#7fb2d3;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111111;--ink:#ece4d3;--mute:#a59d8a;--line:#36322a;--panel:#1d1b17;--accent:#ece4d3;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111111;--ink:#ece4d3;--mute:#a59d8a;--line:#36322a;--panel:#1d1b17;--accent:#ece4d3;color-scheme:dark}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "IBM Plex Sans",system-ui,sans-serif}
@@ -23,7 +23,7 @@ h1{font-weight:300;font-size:clamp(26px,4vw,36px);line-height:1.25;letter-spacin
 .project{padding:40px 0;border-top:1px solid var(--line)}
 .frame{aspect-ratio:16/9;background:var(--panel);border-radius:2px;display:grid;place-items:center;color:var(--mute);font-size:14px;margin-bottom:24px}
 .meta{display:grid;grid-template-columns:1.3fr 1fr;gap:16px 48px}
-h3{font-weight:400;font-size:26px;letter-spacing:-.01em;margin:0 0 4px}.sub{display:block;color:var(--accent);font-size:15px;margin-bottom:8px}.group{font-weight:500;font-size:15px;color:var(--mute);margin:24px 0 0}
+h3{font-weight:400;font-size:26px;letter-spacing:-.01em;margin:0 0 4px}.sub{display:block;color:var(--mute);font-size:15px;margin-bottom:8px}.group{font-weight:500;font-size:15px;color:var(--mute);margin:24px 0 0}
 .project p{margin:0;color:var(--mute);max-width:52ch}
 dl{margin:0;display:grid;grid-template-columns:80px 1fr;gap:6px 16px;font-size:14px;align-content:start}
 dt{color:var(--mute)}dd{margin:0;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px}
@@ -39,7 +39,7 @@ footer a{color:var(--ink)}
 .index img{display:block;width:150px;height:100px;object-fit:cover;border-radius:2px;background:var(--panel)}
 .index h3{font-size:20px;margin:0}.index .sub{margin:2px 0 0}
 .index .st{font:13px "IBM Plex Mono",ui-monospace,monospace;color:var(--mute)}
-.index a:hover h3{color:var(--accent)}
+.index a:hover h3{text-decoration:underline;text-underline-offset:4px}
 #detail-bar{padding:8px 0 16px;font-size:15px}
 .project .detail{grid-column:1/-1;margin-top:32px;max-width:62ch}
 .detail h4{font-weight:500;font-size:15px;color:var(--mute);margin:24px 0 6px}
@@ -51,6 +51,8 @@ footer a{color:var(--ink)}
 .vid{margin:0 0 24px}.vid .clip{margin-bottom:0}.vid figcaption{font-size:13px;color:var(--mute);margin-top:6px}.project>.gallery{margin-bottom:24px}
 .plotfig{margin:32px 0 0}.plotfig img{display:block;width:100%;height:auto;border-radius:2px;background:var(--panel)}.plotfig figcaption{font-size:13px;color:var(--mute);margin-top:6px}
 .ph{font-weight:500;font-size:15px;color:var(--mute);margin:40px 0 12px}.plots{display:grid;grid-template-columns:1fr 1fr;gap:16px}.plots .plotfig{margin:0}@media (max-width:640px){.plots{grid-template-columns:1fr}}
+.photo img,.gallery img,.plotfig img,.clip,.index img{border:1px solid var(--ink);padding:6px;background:var(--panel);border-radius:0}
+.index img{padding:4px}
 </style>
 </head>
 <body>

@@ -55,14 +55,38 @@ footer a{color:var(--ink)}
 .index img{padding:4px}
 .vid.tall{max-width:380px}.clip.tall{aspect-ratio:720/1280}
 .gallery .clip{aspect-ratio:3/4;object-fit:cover;margin:0}
+html{scroll-behavior:smooth}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.ptitle{font-weight:300;font-size:clamp(26px,4vw,36px);line-height:1.25;letter-spacing:-.015em;margin:0;max-width:30ch}
+.hero{position:relative;overflow:hidden;min-height:100vh;min-height:100svh;background:var(--bg);color:var(--ink)}
+.hero .layer{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:28px max(24px,calc((100vw - 1100px)/2)) 36px}
+.hero .inv{position:absolute;inset:0;background:var(--ink);color:var(--bg);pointer-events:none;clip-path:circle(var(--r,0px) at var(--mx,50%) var(--my,50%))}
+.hero a{text-decoration-color:currentColor}
+.hnav{display:flex;justify-content:flex-end;gap:28px;font-size:15px}
+.hbody{flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px}
+.hero h1{font-weight:300;font-size:clamp(44px,11vw,132px);line-height:1;letter-spacing:-.03em;margin:0;max-width:none}
+.hero p{margin:0;max-width:40ch;font-size:clamp(18px,2.2vw,24px);line-height:1.45;font-weight:300;opacity:.85}
+.cue{font-size:15px;text-decoration:none}
+.index a{transition:background .2s,color .2s,box-shadow .2s}
+.index a:hover{background:var(--ink);color:var(--bg);box-shadow:-16px 0 0 var(--ink),16px 0 0 var(--ink)}
+.index a:hover h3{text-decoration:none}
+.index a:hover .sub,.index a:hover .st{color:var(--bg);opacity:.8}
+.index a:hover img{border-color:var(--bg)}
 </style>
 </head>
 <body>
+<section class="hero" id="hero">
+<div class="layer base">
+<nav class="hnav"><a href="#projects">Projects</a><a href="#contact">Contact</a></nav>
+<div class="hbody"><h1>Rooney Salas</h1><p>Hi! I am a student studying Mechanical Engineering at MIT, and I am interested in working on control systems, robotics, and design.</p></div>
+<a class="cue" href="#projects">Projects ↓</a>
+</div>
+<div class="layer inv" aria-hidden="true" inert></div>
+</section>
 <div class="wrap">
-<header><strong style="font-weight:500">Rooney Salas</strong>
+<header id="topbar" hidden><strong style="font-weight:500">Rooney Salas</strong>
 <nav><a href="#projects">Projects</a><a href="#contact">Contact</a></nav></header>
 
-<div class="intro" id="intro"><h1>Mechanical Engineering Portfolio</h1></div>
+<div class="intro" id="intro"><h2 class="ptitle">Mechanical Engineering Portfolio</h2></div>
 
 <main id="projects">
 <div id="home"><ul class="index" id="index"></ul></div>
@@ -179,11 +203,28 @@ arts.forEach(function(a,i){
 function show(){
   var k=location.hash.slice(1),cur=arts.filter(function(a){return a.dataset.slug===k})[0];
   arts.forEach(function(a){a.hidden=a!==cur;var v=a.querySelector('video');if(v){if(a===cur){var r=v.play();if(r&&r.catch)r.catch(function(){})}else v.pause()}});
-  home.hidden=!!cur;intro.hidden=!!cur;bar.hidden=!cur;
+  home.hidden=!!cur;intro.hidden=!!cur;bar.hidden=!cur;document.getElementById('hero').hidden=!!cur;document.getElementById('topbar').hidden=!cur;
   document.title=cur?cur.querySelector('h3').textContent+' \u2014 Rooney Salas':base;
-  if(k==='contact')document.getElementById('contact').scrollIntoView();else window.scrollTo(0,0);
+  if(k==='contact')document.getElementById('contact').scrollIntoView();else if(k==='projects')intro.scrollIntoView();else window.scrollTo(0,0);
 }
 window.addEventListener('hashchange',show);show();
+})();
+</script>
+<script>
+(function(){
+var hero=document.getElementById('hero'),base=hero.querySelector('.base'),inv=hero.querySelector('.inv');
+inv.innerHTML=base.innerHTML;
+var tx=0,ty=0,x=0,y=0,r=0,tr=0,raf=0,reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function set(){inv.style.setProperty('--mx',x+'px');inv.style.setProperty('--my',y+'px');inv.style.setProperty('--r',r+'px')}
+function loop(){var k=reduce?1:.18;x+=(tx-x)*k;y+=(ty-y)*k;r+=(tr-r)*k;set();
+ if(Math.abs(tx-x)>.3||Math.abs(ty-y)>.3||Math.abs(tr-r)>.3)raf=requestAnimationFrame(loop);else raf=0}
+function go(){if(!raf)raf=requestAnimationFrame(loop)}
+function pos(e){var b=hero.getBoundingClientRect();tx=e.clientX-b.left;ty=e.clientY-b.top;tr=Math.max(140,Math.min(220,b.width*.16));if(r<1){x=tx;y=ty}go()}
+hero.addEventListener('pointermove',pos);hero.addEventListener('pointerdown',pos);
+hero.addEventListener('pointerleave',function(){tr=0;go()});
+hero.addEventListener('pointerup',function(e){if(e.pointerType==='touch'){tr=0;go()}});
+if(!reduce&&!hero.hidden){var b=hero.getBoundingClientRect();x=tx=b.width*.28;y=ty=b.height*.45;
+ setTimeout(function(){tr=170;go();setTimeout(function(){if(!hero.matches(':hover')){tr=0;go()}},1400)},500)}
 })();
 </script>
 </body>
